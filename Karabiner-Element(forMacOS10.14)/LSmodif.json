@@ -1,0 +1,148 @@
+{
+  "title": "LS modification",
+  "maintainers": ["tekezo"],
+  "rules": [{
+    "description": "Emacs Navigation",
+    "manipulators": [
+        {
+            "type": "basic",
+            "from": {
+                "key_code": "u",
+                "modifiers": {
+                    "mandatory": ["left_command"],
+                    "optional": ["any"]
+                    }
+               },
+            "to": [{
+                    "key_code": "up_arrow",
+                    "modifiers":["left_command"]    
+                 }],
+            "conditions": [{
+                "type": "frontmost_application_if",
+                "bundle_identifiers": ["^com\\.apple\\.finder$"]
+                }]
+        },
+        {
+          "from": {
+            "key_code": "f",
+            "modifiers": {
+              "mandatory": ["left_control"],
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "right_arrow"
+            }
+          ],
+          "conditions": [{
+            "type": "frontmost_application_unless",
+            "bundle_identifiers": ["^com\\.apple\\.terminal$"]
+           }],
+          "type": "basic"
+        },
+
+        {
+          "from": {
+            "key_code": "b",
+            "modifiers": {
+              "mandatory": ["left_control"],
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "left_arrow"
+            }
+          ],
+          "conditions": [{
+            "type": "frontmost_application_unless",
+            "bundle_identifiers": ["^com\\.apple\\.terminal$"]
+           }],
+          "type": "basic"
+        },
+
+
+        {
+          "from": {
+            "key_code": "n",
+            "modifiers": {
+              "mandatory": ["left_control"],
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "down_arrow"
+            }
+          ],
+          "conditions": [{
+            "type": "frontmost_application_unless",
+            "bundle_identifiers": ["^com\\.apple\\.terminal$"]
+           }],
+          "type": "basic"
+        },
+
+
+        {
+          "from": {
+            "key_code": "p",
+            "modifiers": {
+              "mandatory": ["left_control"],
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "up_arrow"
+            }
+          ],
+          "conditions": [{
+            "type": "frontmost_application_unless",
+            "bundle_identifiers": ["^com\\.apple\\.terminal$"]
+           }],
+          "type": "basic"
+        },
+
+        {
+          "from": {
+            "key_code": "a",
+            "modifiers": {
+              "mandatory": ["left_control"],
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "home"
+            }
+          ],
+          "conditions": [{
+            "type": "frontmost_application_unless",
+            "bundle_identifiers": ["^com\\.apple\\.terminal$"]
+           }],
+          "type": "basic"
+        },
+
+        {
+          "from": {
+            "key_code": "e",
+            "modifiers": {
+              "mandatory": ["left_control"],
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "end"
+            }
+          ],
+          "conditions": [{
+            "type": "frontmost_application_unless",
+            "bundle_identifiers": ["^com\\.apple\\.terminal$"]
+           }],
+          "type": "basic"
+        }
+    ]
+  }]
+}

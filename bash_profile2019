@@ -1,0 +1,21 @@
+echo ".:*:・'゜☆。★☆  W E L C O M E  ☆★。☆゜'・:*:."
+echo ".bash_profile"
+export PATH="~/srcCODE/bin:$PATH"
+# MacPorts Installer addition on 2016-12-13_at_22:34:48: adding an appropriate PATH variable for use with MacPorts.
+export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
+
+alias em="emacs"
+alias sc="screen"
+alias amarao="ssh root@leethray.com"
+alias du="du -sh"
+alias dua='du -sch .[!.]* *'
+
+echo "--------------------------------------
+PERSONAL SCRIPTS:
+ls-help        read BASH Shell Note
+ls-server      read Server Note
+ls-toiTunes12  recover iTunes12.5
+ls-toiTunes10  kill iTunes12.5, use good old iTunes10.7
+--------------------------------------"
+
+
