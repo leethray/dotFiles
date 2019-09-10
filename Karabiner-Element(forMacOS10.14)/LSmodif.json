@@ -1,7 +1,8 @@
 {
   "title": "LS modification",
   "maintainers": ["tekezo"],
-  "rules": [{
+  "rules": [
+  {
     "description": "Emacs Navigation",
     "manipulators": [
         {
@@ -114,7 +115,11 @@
           },
           "to": [
             {
-              "key_code": "home"
+              "key_code": "left_arrow",
+              "modifiers": {
+              "mandatory": ["left_command"],
+              "optional": ["any"]
+            }
             }
           ],
           "conditions": [{
@@ -134,7 +139,31 @@
           },
           "to": [
             {
-              "key_code": "end"
+              "key_code": "right_arrow",
+              "modifiers": {
+              "mandatory": ["left_command"],
+              "optional": ["any"]
+            }
+            }
+          ],
+          "conditions": [{
+            "type": "frontmost_application_unless",
+            "bundle_identifiers": ["^com\\.apple\\.terminal$"]
+           }],
+          "type": "basic"
+        },
+
+        {
+          "from": {
+            "key_code": "d",
+            "modifiers": {
+              "mandatory": ["left_control"],
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "delete_forward"
             }
           ],
           "conditions": [{
@@ -144,5 +173,24 @@
           "type": "basic"
         }
     ]
-  }]
+  },
+  {
+    "description": "Application and Path shortcut",
+    "manipulators": [
+      {      
+        "type": "basic",
+        "from": {
+            "key_code": "slash",
+            "modifiers": {
+                "mandatory": ["right_command","right_option"],
+                "optional": ["any"]
+                }
+           },
+        "to": [{
+             "shell_command": "open -a 'Safari.app'"  
+             }]
+      }
+    ]
+  }
+ ]
 }
