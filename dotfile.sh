@@ -38,13 +38,6 @@ defaults write NSGlobalDomain AppleShowScrollBars -string "WhenScrolling"
 # Disable the over-the-top focus ring animation
 defaults write NSGlobalDomain NSUseAnimatedFocusRing -bool false
 
-# Disable smooth scrolling
-# (Uncomment if you’re on an older Mac that messes up the animation)
-#defaults write NSGlobalDomain NSScrollAnimationEnabled -bool false
-
-# Increase window resize speed for Cocoa applications
-# defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
-
 # Expand save panel by default
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
@@ -64,19 +57,6 @@ defaults write com.apple.LaunchServices LSQuarantine -bool false
 
 # Remove duplicates in the “Open With” menu (also see `lscleanup` alias)
 /System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user
-
-# Display ASCII control characters using caret notation in standard text views
-# Try e.g. `cd /tmp; unidecode "\x{0000}" > cc.txt; open -e cc.txt`
-# defaults write NSGlobalDomain NSTextShowsControlCharacters -bool true
-
-# Disable Resume system-wide
-defaults write com.apple.systempreferences NSQuitAlwaysKeepsWindows -bool 0
-
-# Disable automatic termination of inactive apps
-defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true
-
-# Disable the crash reporter
-#defaults write com.apple.CrashReporter DialogType -string "none"
 
 # Set Help Viewer windows to non-floating mode
 defaults write com.apple.helpviewer DevMode -bool true
@@ -144,12 +124,6 @@ defaults write NSGlobalDomain AppleMetricUnits -bool true
 # defaults write com.apple.screensaver askForPassword -int 1
 # defaults write com.apple.screensaver askForPasswordDelay -int 0
 
-# Save screenshots to the desktop
-# defaults write com.apple.screencapture location -string "${HOME}/Desktop"
-
-# Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)
-# defaults write com.apple.screencapture type -string "png"
-
 # Enable subpixel font rendering on non-Apple LCDs
 # Reference: https://github.com/kevinSuttle/macOS-Defaults/issues/17#issuecomment-266633501
 defaults write NSGlobalDomain AppleFontSmoothing -int 1
@@ -157,9 +131,6 @@ defaults write NSGlobalDomain AppleFontSmoothing -int 1
 ###############################################################################
 # Finder                                                                      #
 ###############################################################################
-
-# Finder: allow quitting via ⌘ + Q; doing so will also hide desktop icons
-# defaults write com.apple.finder QuitMenuItem -bool true
 
 # Finder: disable window animations and Get Info animations
 defaults write com.apple.finder DisableAllAnimations -bool true
@@ -456,23 +427,9 @@ defaults write com.apple.Safari InstallExtensionUpdatesAutomatically -bool false
 # Mail                                                                        #
 ###############################################################################
 
-# Disable send and reply animations in Mail.app
-# defaults write com.apple.mail DisableReplyAnimations -bool true
-# defaults write com.apple.mail DisableSendAnimations -bool true
 
 # Copy email addresses as `foo@example.com` instead of `Foo Bar <foo@example.com>` in Mail.app
 defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
-
-# Add the keyboard shortcut ⌘ + Enter to send an email in Mail.app
-# defaults write com.apple.mail NSUserKeyEquivalents -dict-add "Send" "@\U21a9"
-
-# Display emails in threaded mode, sorted by date (oldest at the top)
-defaults write com.apple.mail DraftsViewerAttributes -dict-add "DisplayInThreadedMode" -string "yes"
-# defaults write com.apple.mail DraftsViewerAttributes -dict-add "SortedDescending" -string "yes"
-defaults write com.apple.mail DraftsViewerAttributes -dict-add "SortOrder" -string "received-date"
-
-# Disable inline attachments (just show the icons)
-# defaults write com.apple.mail DisableInlineAttachmentViewing -bool true
 
 # Disable automatic spell checking
 defaults write com.apple.mail SpellCheckingBehavior -string "NoSpellCheckingEnabled"
@@ -525,104 +482,7 @@ defaults write com.apple.mail SpellCheckingBehavior -string "NoSpellCheckingEnab
 # Rebuild the index from scratch
 # sudo mdutil -E / > /dev/null
 
-###############################################################################
-# Terminal & iTerm 2                                                          #
-###############################################################################
 
-# Only use UTF-8 in Terminal.app
-defaults write com.apple.terminal StringEncodings -array 4
-
-# Use a modified version of the Solarized Dark theme by default in Terminal.app
-# osascript <<EOD
-
-# tell application "Terminal"
-
-# 	local allOpenedWindows
-# 	local initialOpenedWindows
-# 	local windowID
-# 	set themeName to "Solarized Dark xterm-256color"
-
-# 	(* Store the IDs of all the open terminal windows. *)
-# 	set initialOpenedWindows to id of every window
-
-# 	(* Open the custom theme so that it gets added to the list
-# 	   of available terminal themes (note: this will open two
-# 	   additional terminal windows). *)
-# 	do shell script "open '$HOME/init/" & themeName & ".terminal'"
-
-# 	(* Wait a little bit to ensure that the custom theme is added. *)
-# 	delay 1
-
-# 	(* Set the custom theme as the default terminal theme. *)
-# 	set default settings to settings set themeName
-
-# 	(* Get the IDs of all the currently opened terminal windows. *)
-# 	set allOpenedWindows to id of every window
-
-# 	repeat with windowID in allOpenedWindows
-
-# 		(* Close the additional windows that were opened in order
-# 		   to add the custom theme to the list of terminal themes. *)
-# 		if initialOpenedWindows does not contain windowID then
-# 			close (every window whose id is windowID)
-
-# 		(* Change the theme for the initial opened terminal windows
-# 		   to remove the need to close them in order for the custom
-# 		   theme to be applied. *)
-# 		else
-# 			set current settings of tabs of (every window whose id is windowID) to settings set themeName
-# 		end if
-
-# 	end repeat
-
-# end tell
-
-# EOD
-
-# Enable “focus follows mouse” for Terminal.app and all X11 apps
-# i.e. hover over a window and start typing in it without clicking first
-#defaults write com.apple.terminal FocusFollowsMouse -bool true
-#defaults write org.x.X11 wm_ffm -bool true
-
-# Enable Secure Keyboard Entry in Terminal.app
-# See: https://security.stackexchange.com/a/47786/8918
-defaults write com.apple.terminal SecureKeyboardEntry -bool true
-
-# Disable the annoying line marks
-# defaults write com.apple.Terminal ShowLineMarks -int 0
-
-# Install the Solarized Dark theme for iTerm
-# open "${HOME}/init/Solarized Dark.itermcolors"
-
-# Don’t display the annoying prompt when quitting iTerm
-# defaults write com.googlecode.iterm2 PromptOnQuit -bool false
-
-###############################################################################
-# Time Machine                                                                #
-###############################################################################
-
-# Prevent Time Machine from prompting to use new hard drives as backup volume
-defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
-
-# Disable local Time Machine backups
-# hash tmutil &> /dev/null && sudo tmutil disablelocal
-
-###############################################################################
-# Activity Monitor                                                            #
-###############################################################################
-
-# Show the main window when launching Activity Monitor
-defaults write com.apple.ActivityMonitor OpenMainWindow -bool true
-
-# Visualize CPU usage in the Activity Monitor Dock icon
-defaults write com.apple.ActivityMonitor IconType -int 5
-
-# Show all processes in Activity Monitor
-defaults write com.apple.ActivityMonitor ShowCategory -int 0
-
-# Sort Activity Monitor results by CPU usage
-defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"
-defaults write com.apple.ActivityMonitor SortDirection -int 0
 
 ###############################################################################
 # Address Book, Dashboard, iCal, TextEdit, and Disk Utility                   #
@@ -631,14 +491,9 @@ defaults write com.apple.ActivityMonitor SortDirection -int 0
 # Enable the debug menu in Address Book
 defaults write com.apple.addressbook ABShowDebugMenu -bool true
 
-# Enable Dashboard dev mode (allows keeping widgets on the desktop)
-defaults write com.apple.dashboard devmode -bool true
-
-# Enable the debug menu in iCal (pre-10.8)
-defaults write com.apple.iCal IncludeDebugMenu -bool true
-
 # Use plain text mode for new TextEdit documents
 defaults write com.apple.TextEdit RichText -int 0
+
 # Open and save files as UTF-8 in TextEdit
 defaults write com.apple.TextEdit PlainTextEncoding -int 4
 defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
@@ -647,8 +502,6 @@ defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
 defaults write com.apple.DiskUtility DUDebugMenuEnabled -bool true
 defaults write com.apple.DiskUtility advanced-image-options -bool true
 
-# Auto-play videos when opened with QuickTime Player
-defaults write com.apple.QuickTimePlayerX MGPlayMovieOnOpen -bool true
 
 ###############################################################################
 # Mac App Store                                                               #
@@ -658,9 +511,9 @@ defaults write com.apple.QuickTimePlayerX MGPlayMovieOnOpen -bool true
 defaults write com.apple.appstore WebKitDeveloperExtras -bool true
 
 # Enable Debug Menu in the Mac App Store
-defaults write com.apple.appstore ShowDebugMenu -bool true
+# defaults write com.apple.appstore ShowDebugMenu -bool true
 
-# Enable the automatic update check
+# Disable the automatic update check
 defaults write com.apple.SoftwareUpdate AutomaticCheckEnabled -bool false
 
 # Check for software updates daily, not just once per week
@@ -675,8 +528,8 @@ defaults write com.apple.SoftwareUpdate AutomaticCheckEnabled -bool false
 # Automatically download apps purchased on other Macs
 # defaults write com.apple.SoftwareUpdate ConfigDataInstall -int 1
 
-# Turn on app auto-update
-# defaults write com.apple.commerce AutoUpdate -bool true
+# Turn off app auto-update
+defaults write com.apple.commerce AutoUpdate -bool false
 
 # Allow the App Store to reboot machine on macOS updates
 # defaults write com.apple.commerce AutoUpdateRestartRequired -bool true
@@ -706,12 +559,12 @@ defaults write com.apple.messageshelper.MessageController SOInputLineSettings -d
 ###############################################################################
 
 # Disable the all too sensitive backswipe on trackpads
-defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false
-defaults write com.google.Chrome.canary AppleEnableSwipeNavigateWithScrolls -bool false
+# defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false
+# defaults write com.google.Chrome.canary AppleEnableSwipeNavigateWithScrolls -bool false
 
 # Disable the all too sensitive backswipe on Magic Mouse
-defaults write com.google.Chrome AppleEnableMouseSwipeNavigateWithScrolls -bool false
-defaults write com.google.Chrome.canary AppleEnableMouseSwipeNavigateWithScrolls -bool false
+# defaults write com.google.Chrome AppleEnableMouseSwipeNavigateWithScrolls -bool false
+# defaults write com.google.Chrome.canary AppleEnableMouseSwipeNavigateWithScrolls -bool false
 
 # Use the system-native print preview dialog
 defaults write com.google.Chrome DisablePrintPreview -bool true
@@ -746,20 +599,5 @@ defaults write -g NSUserKeyEquivalents -dict-add "Adjust Size..." -string "^@i"
 # Kill affected applications                                                  #
 ###############################################################################
 
-for app in "Activity Monitor" \
-	"Address Book" \
-	"Calendar" \
-	"Contacts" \
-	"Dock" \
-	"Finder" \
-	"Mail" \
-	"Messages" \
-	"Opera" \
-	"Photos" \
-	"Safari" \
-	"SizeUp" \
-	"Terminal" \
-	"iCal"; do
-	killall "${app}" &> /dev/null
-done
+killall Dock
 echo "Done. Note that some of these changes require a logout/restart to take effect."
