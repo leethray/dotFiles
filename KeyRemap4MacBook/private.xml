@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <root>
+ <!-- Define my devices -->
   <devicevendordef>
     <vendorname>APPLE</vendorname>
     <vendorid>0x05ac</vendorid>
@@ -8,6 +9,16 @@
   <deviceproductdef>
     <productname>MY_INTERNAL_KEYBOARD</productname>
     <productid>0x0290</productid>
+  </deviceproductdef>
+
+  <devicevendordef>
+    <vendorname>FREEWAY TECHNOLOGY</vendorname>
+    <vendorid>0x25a7</vendorid>
+  </devicevendordef>
+
+  <deviceproductdef>
+    <productname>RFIC-MOUSE</productname>
+    <productid>0x2402</productid>
   </deviceproductdef>
 
   <item>
@@ -92,38 +103,76 @@
     <autogen>__KeyToKey__ PointingButton::LEFT, VK_COMMAND, KeyCode::F12</autogen>
   </item>
 
-  <!-- ============================================================ -->
-  <!-- An example of appdef -->
-  <appdef>
-    <appname>APPSTORE</appname>
-    <equal>com.apple.appstore</equal>
-  </appdef>
 
   <item>
-    <name>Space to Tab on App Store.app</name>
-    <identifier>private.appdef</identifier>
-    <only>APPSTORE</only>
-    <autogen>__KeyToKey__ KeyCode::SPACE, KeyCode::TAB</autogen>
+    <name>Air Mouse Fix</name>
+    <identifier>private.air_mouse_fix</identifier>
+    <device_only>DeviceVendor::FREEWAY TECHNOLOGY, DeviceProduct::RFIC-MOUSE</device_only>
+    <autogen>
+    __ScrollWheelToKey__
+    ScrollWheel::RIGHT
+    </autogen>
+
+    <autogen>
+    __ScrollWheelToKey__
+    ScrollWheel::LEFT
+    </autogen>
+
+    <autogen>
+    __ScrollWheelToKey__
+    ScrollWheel::UP
+    </autogen>
+
+    <autogen>
+    __ScrollWheelToKey__
+    ScrollWheel::DOWN
+    </autogen>
   </item>
-
-  <!-- ============================================================ -->
-  <!-- An example of devicevendordef,deviceproductdef -->
-  <devicevendordef>
-    <vendorname>HEWLETT_PACKARD</vendorname>
-    <vendorid>0x03f0</vendorid>
-  </devicevendordef>
-
-  <deviceproductdef>
-    <productname>MY_HP_KEYBOARD</productname>
-    <productid>0x0224</productid>
-  </deviceproductdef>
 
   <item>
-    <name>Space to Tab on MY_HP_KEYBOARD</name>
-    <identifier>private.deviceproductdef</identifier>
-    <device_only>DeviceVendor::HEWLETT_PACKARD, DeviceProduct::MY_HP_KEYBOARD</device_only>
-    <autogen>__KeyToKey__ KeyCode::SPACE, KeyCode::TAB</autogen>
+    <name>Air Mouse Shortcut Key</name>
+    <identifier>private.air_mouse_shortcut</identifier>
+    <device_only>DeviceVendor::FREEWAY TECHNOLOGY, DeviceProduct::RFIC-MOUSE</device_only>
+
+    <autogen>
+    __KeyToKey__ 
+    KeyCode::PC_APPLICATION,
+    KeyCode::W, ModifierFlag::COMMAND_L
+    </autogen>
+
+    <autogen>
+    __KeyToKey__ 
+    KeyCode::F3,
+    KeyCode::CURSOR_UP, ModifierFlag::CONTROL_L
+    </autogen>
+
+    <autogen>
+    __KeyToKey__ 
+    KeyCode::F4,
+    KeyCode::CURSOR_LEFT, ModifierFlag::CONTROL_L
+    </autogen>
+
+    <autogen>
+    __KeyToKey__ 
+    KeyCode::F5,
+    KeyCode::CURSOR_RIGHT, ModifierFlag::CONTROL_L
+    </autogen>
+
+    <autogen>
+    __KeyToKey__ 
+    KeyCode::F6,
+    KeyCode::BRACKET_LEFT, ModifierFlag::COMMAND_L, ModifierFlag::SHIFT_L
+    </autogen>
+
+    <autogen>
+    __KeyToKey__ 
+    KeyCode::F7,
+    KeyCode::BRACKET_RIGHT, ModifierFlag::COMMAND_L, ModifierFlag::SHIFT_L
+    </autogen>
+
+
   </item>
+
 
   <!-- ============================================================ -->
 </root>
